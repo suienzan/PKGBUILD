@@ -1,0 +1,10 @@
+[Unit]
+Description=Check mosdns-bin update
+
+[Timer]
+Unit=update-mosdns-bin@%i.service
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target

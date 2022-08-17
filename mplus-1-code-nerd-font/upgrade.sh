@@ -32,9 +32,9 @@ CURRENT="$(grep -Po '(?<=pkgver=)[^&]*' PKGBUILD)"
 if [ "$VERSION" = "$CURRENT" ]; then
   echo "No new version."
 else
-  sed -i "s/\(_mplusver=\)\(.*\)/\1$TIME/" PKGBUILD
-  sed -i "s/\(pkgver=\)\(.*\)/\1$VERSION/" PKGBUILD
-  sed -i -E "s/(.*nerd-fonts\/releases\/download\/)(.*)(\/FontPatcher.zip)/\1$NERD_VERSION\3/" PKGBUILD
+  sed -i -E "s/(_mplusver=)(.*)/\1$TIME/" PKGBUILD
+  sed -i -E "s/(pkgver=)(.*)/\1$VERSION/" PKGBUILD
+  sed -i -E "s|(.*nerd-fonts/releases/download/)(.*)(/FontPatcher.zip)|\1$NERD_VERSION\3|" PKGBUILD
   sed -i '/epoch=1/d' PKGBUILD
 
   updpkgsums || (

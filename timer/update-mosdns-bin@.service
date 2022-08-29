@@ -1,7 +1,0 @@
-[Unit]
-Description=Update mosdns-bin
-
-[Service]
-Type=oneshot
-WorkingDirectory=%h/%i/mosdns-bin
-ExecStart=/usr/bin/bash %h/%i/mosdns-bin/upgrade.sh

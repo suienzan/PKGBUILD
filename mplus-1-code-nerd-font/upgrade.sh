@@ -9,21 +9,16 @@ get_mplus1code_update_time() {
     jq -r '.[0].commit.committer.date' |
     sed -r 's/[-:TZ]//g'
 }
+
 TIME="$(get_mplus1code_update_time)"
-[[ -z "$TIME" ]] && {
-  echo "Error get version"
-  exit 1
+
+get_latest_release() {
+  curl --silent "https://api.github.com/repos/$1/releases/latest" |
+    grep '"tag_name":' |
+    sed -E 's/.*"v([^"]+)".*/\1/'
 }
 
-get_nerd_version() {
-  curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases |
-    jq -r 'map(select(.prerelease)) | first | .tag_name'
-}
-NERD_VERSION="$(get_nerd_version)"
-[[ -z "$NERD_VERSION" ]] && {
-  echo "Error get nerd version"
-  exit 1
-}
+NERD_VERSION="$(get_latest_release ryanoasis/nerd-fonts)"
 
 VERSION="$TIME".${NERD_VERSION//-/_}
 echo "Version: $VERSION"
@@ -34,7 +29,7 @@ if [ "$VERSION" = "$CURRENT" ]; then
 else
   sed -i -E "s/(_mplusver=)(.*)/\1$TIME/" PKGBUILD
   sed -i -E "s/(pkgver=)(.*)/\1$VERSION/" PKGBUILD
-  sed -i -E "s|(.*nerd-fonts/releases/download/)(.*)(/FontPatcher.zip)|\1$NERD_VERSION\3|" PKGBUILD
+  sed -i -E "s|(.*nerd-fonts/releases/download/)(.*)(/FontPatcher.zip)|\1v$NERD_VERSION\3|" PKGBUILD
   sed -i '/epoch=1/d' PKGBUILD
 
   updpkgsums || (
@@ -44,7 +39,7 @@ else
   )
 
   makepkg --printsrcinfo >.SRCINFO
-  makepkg -f
+  makepkg -f || exit 1
   git add .
   git commit -m v"$VERSION"
   git push

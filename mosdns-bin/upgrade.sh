@@ -30,8 +30,8 @@ else
     exit 1
   )
 
-  makepkg -f
   makepkg --printsrcinfo >.SRCINFO
+  makepkg -f || exit 1
   git add .
   git commit -m v"$VERSION"
   git push

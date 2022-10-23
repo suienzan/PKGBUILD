@@ -23,6 +23,7 @@ elif [ "$VERSION" = "$CURRENT" ]; then
   echo "No new version."
 else
   sed -i -E "s/(pkgver=)(.*)/\1$VERSION/" PKGBUILD
+  sed -i -E "s/(pkgrel=)(.*)/\11/" PKGBUILD
 
   updpkgsums || (
     git add . &

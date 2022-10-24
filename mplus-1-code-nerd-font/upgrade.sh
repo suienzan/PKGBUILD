@@ -30,7 +30,7 @@ else
   sed -i -E "s/(_mplusver=)(.*)/\1$TIME/" PKGBUILD
   sed -i -E "s/(pkgver=)(.*)/\1$VERSION/" PKGBUILD
   sed -i -E "s/(pkgrel=)(.*)/\11/" PKGBUILD
-  sed -i -E "s|(.*nerd-fonts/releases/download/)(.*)(/FontPatcher.zip)|\1v$NERD_VERSION\3|" PKGBUILD
+  sed -i -E "s|(FontPatcher-v)(.*)(.zip::.*nerd-fonts/releases/download/)(.*)(/FontPatcher.zip)|\1$NERD_VERSION\3v$NERD_VERSION\5|" PKGBUILD
   sed -i '/epoch=1/d' PKGBUILD
 
   updpkgsums || (

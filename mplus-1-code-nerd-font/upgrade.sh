@@ -1,5 +1,7 @@
 #! /usr/bin/bash
 
+cd .. && git pull
+
 cd mplus-1-code-nerd-font || exit
 
 git fetch origin && git reset --hard origin/master >>/dev/null 2>&1

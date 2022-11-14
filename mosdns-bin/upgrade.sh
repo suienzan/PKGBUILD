@@ -1,5 +1,7 @@
 #! /usr/bin/bash
 
+cd .. && git pull
+
 cd mosdns-bin || exit
 
 git fetch origin && git reset --hard origin/master >>/dev/null 2>&1

@@ -35,7 +35,7 @@ else
   makepkg -f || exit 1
   git add .
   git commit -m v"$VERSION"
-  git push
+  git push origin HEAD:master
 
   cd ..
   repo="${PWD##*/} v$VERSION"

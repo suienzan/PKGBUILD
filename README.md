@@ -2,4 +2,4 @@
 
 ## Reqiured packages
 
-`pacman-contrib jq fontforge`
+`pacman-contrib`

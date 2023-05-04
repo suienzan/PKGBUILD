@@ -26,6 +26,7 @@ elif [ "$VERSION" = "$CURRENT" ]; then
 else
   sed -i -E "s/(pkgver=)(.*)/\1$VERSION/" PKGBUILD
   sed -i -E "s/(pkgrel=)(.*)/\11/" PKGBUILD
+  sed -i '/epoch=1/d' PKGBUILD
 
   updpkgsums || (
     git add . &

@@ -1,7 +1,3 @@
-[submodule "mplus-1-code-nerd-font/mplus-1-code-nerd-font"]
-	path = mplus-1-code-nerd-font/mplus-1-code-nerd-font
-	url = ssh://aur@aur.archlinux.org/mplus-1-code-nerd-font.git
-  branch = master
 [submodule "mosdns-bin/mosdns-bin"]
 	path = mosdns-bin/mosdns-bin
 	url = ssh://aur@aur.archlinux.org/mosdns-bin.git
